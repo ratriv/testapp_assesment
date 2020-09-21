@@ -1,7 +1,7 @@
 FROM alpine
 RUN apk add nginx; \
     mkdir /run/nginx/; \
-    echo "<h1>This is Neonomics Testapp.... Rahul Trivedi</h1>" > /var/www/localhost/htdocs/index.html;
+    echo "<h1>This is  Testapp.... Rahul Trivedi</h1>" > /var/www/localhost/htdocs/index.html;
 
 ADD $PWD/config/default.conf /etc/nginx/conf.d/default.conf
 
@@ -16,6 +16,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/bin/sh","/usr/local/bin/entrypoint.sh"]
 
-EXPOSE 80
-EXPOSE 443
 CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'; nginx -s reload;"]
