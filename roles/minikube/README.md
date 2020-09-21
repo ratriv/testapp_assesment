@@ -29,7 +29,6 @@ The defaults are for Ubuntu based systems so if you are running another distribu
 
   * **docker_machine_xhyve_driver_version** is the version of the XHyve driver to install. Defaults to `v0.3.3`. You can find all versions [here](https://github.com/zchee/docker-machine-driver-xhyve/releases).
 
-Note: this is ignored when installing on Linux.
 
 Example Playbook
 ----------------
