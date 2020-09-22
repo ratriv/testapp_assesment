@@ -1,0 +1,25 @@
+pipeline {
+   agent any   
+   stages {
+       
+       stage('Test') {
+           agent {
+		       docker { image 'ratriv/testapp_backend:latest' }
+           }
+           steps {
+		       def output = sh returnStdout: true, script: '(export TO_DAY=`date '+%Y-%m-%d'`;tail -1 /usr/local/tomcat/logs/catalina.$TO_DAY.log|grep -i 'Server startup' >/dev/null) && echo "Yes" || echo "No"'
+               if (output == 'Yes') {	
+			   } else {
+			   error ("Docker image Failed")
+			   }
+        }
+       }
+       stage ('Deploy') {
+           steps {
+               script{
+                   sh "kubectl apply -f k8s_deployment/."
+               }
+           }
+       }
+   }
+}
