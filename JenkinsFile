@@ -8,10 +8,11 @@ pipeline {
            }
            steps {
 		       def output = sh returnStdout: true, script: '(export TO_DAY=`date '+%Y-%m-%d'`;tail -1 /usr/local/tomcat/logs/catalina.$TO_DAY.log|grep -i 'Server startup' >/dev/null) && echo "Yes" || echo "No"'
-               if (output == 'Yes') {	
-			   } else {
-			   error ("Docker image Failed")
-			   }
+               if (output == 'Yes') {
+	       		printf(“Image Tested Successfully”)
+		} else {
+			error ("Docker image Failed")
+		}
         }
        }
        stage ('Deploy') {
